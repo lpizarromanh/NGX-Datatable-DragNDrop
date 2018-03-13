@@ -1,0 +1,226 @@
+<section class="col-xs-8 edit-content">
+  <div *ngIf="buttonsShow && role == 'contributor'">
+    <button data-toggle="modal" data-target="#goalAddModal" type="button" class="btn-outline col-lg-3 col-md-7 col-sm-8 pull-right slide-button">
+      <span data-icon="&#xe035;"></span>Add Goal
+    </button>
+  </div>
+  <div *ngIf="buttonsShow && role == 'teamlead'">
+    <button data-toggle="modal" data-target="#goalAddModal" type="button" class="btn-outline col-lg-3 col-md-7 col-sm-8 pull-right slide-button">
+      <span data-icon="&#xe035;"></span>Add Goal
+    </button>
+  </div>
+  <h2>Unit Goals Management</h2>
+  <br>
+  <p>Below is a summary of your Unit Goals.</p>
+  <p class="subtitle">
+    To change the order in which the goals are displayed, clicking and hold the goal you wish to
+    move, and drag it up or down, releasing in the appropriate location. The item will move as intended.
+    To update the number of the goal accordingly, please Refresh the page.
+  </p>
+  <h3 id="backtitle" style="padding: 5px">Looking Back</h3>
+  <div *ngIf="rowsLookingBackReady">
+    <ngx-datatable
+      class="material"
+      [rows]="rowsLookingBack"
+      [columns]="columnsLookingBack"
+      [columnMode]="'force'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="'auto'"
+      [trackByProp]="$$index"
+      [selectionType]="'single'"
+      (select)='onSelectRow($event)'
+
+      [dragulaName]="'LookingBackBag'"
+      [dragulaModel]="rowsLookingBack"
+      [classSelector]="'selector fa fa-bars'"
+      (directiveDrop)="onDrop($event)"
+      (directiveDrag)="onDrag($event)">
+      <ngx-datatable-column [flexGrow]="0" >
+          <template ngx-datatable-header-template>
+              <span>Drag</span>
+          </template>
+          <template row="row" ngx-datatable-cell-template>
+              <span class="selector fa fa-bars"></span>
+          </template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [flexGrow]="1">
+          <template ngx-datatable-header-template>
+              <span >#</span>
+          </template>
+          <template let-row="row" ngx-datatable-cell-template>
+              <span>{{row.id}}</span>
+          </template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [flexGrow]="1">
+          <template ngx-datatable-header-template>
+              <span >Goal Title</span>
+          </template>
+          <template let-row="row" ngx-datatable-cell-template>
+              <span>{{row.goal}}</span>
+          </template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [flexGrow]="1">
+          <template ngx-datatable-header-template>
+              <span >Status</span>
+          </template>
+          <template let-row="row" ngx-datatable-cell-template>
+              <span>{{row.status}}</span>
+          </template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [flexGrow]="1">
+          <template ngx-datatable-header-template>
+              <span >Last Updated</span>
+          </template>
+          <template let-row="row" ngx-datatable-cell-template>
+              <span>{{row.date}}</span>
+          </template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [flexGrow]="1">
+          <template ngx-datatable-header-template>
+              <span >Author</span>
+          </template>
+          <template let-row="row" ngx-datatable-cell-template>
+              <span>{{row.author}}</span>
+          </template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+  <h3 id="realtitle" style="padding: 5px;">Real Time</h3>
+  <div *ngIf="rowsRealTimeReady">
+    <ngx-datatable
+      class="material"
+      [rows]="rowsRealTime"
+      [columns]="columnsRealTime"
+      [columnMode]="'force'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="'auto'"
+      [trackByProp]="$$index"
+      [selectionType]="'single'"
+      (select)='onSelectRow($event)'
+
+      [dragulaName]="'realTimeBag'"
+      [dragulaModel]="rowsRealTime"
+      [classSelector]="'selector fa fa-bars'"
+      (directiveDrop)="onDrop($event)"
+      (directiveDrag)="onDrag($event)">
+      <ngx-datatable-column [flexGrow]="0" >
+          <template ngx-datatable-header-template>
+              <span>Drag</span>
+          </template>
+          <template row="row" ngx-datatable-cell-template>
+              <span class="selector fa fa-bars"></span>
+          </template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [flexGrow]="1">
+          <template ngx-datatable-header-template>
+              <span >#</span>
+          </template>
+          <template let-row="row" ngx-datatable-cell-template>
+              <span>{{row.id}}</span>
+          </template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [flexGrow]="1">
+          <template ngx-datatable-header-template>
+              <span >Goal Title</span>
+          </template>
+          <template let-row="row" ngx-datatable-cell-template>
+              <span>{{row.goal}}</span>
+          </template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [flexGrow]="1">
+          <template ngx-datatable-header-template>
+              <span >Status</span>
+          </template>
+          <template let-row="row" ngx-datatable-cell-template>
+              <span>{{row.status}}</span>
+          </template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [flexGrow]="1">
+          <template ngx-datatable-header-template>
+              <span >Last Updated</span>
+          </template>
+          <template let-row="row" ngx-datatable-cell-template>
+              <span>{{row.date}}</span>
+          </template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [flexGrow]="1">
+          <template ngx-datatable-header-template>
+              <span >Author</span>
+          </template>
+          <template let-row="row" ngx-datatable-cell-template>
+              <span>{{row.author}}</span>
+          </template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+  <h3 id="aheadtitle" style="padding: 5px;">Looking Ahead</h3>
+  <div *ngIf="rowsLookingAheadReady">
+    <ngx-datatable
+      class="material"
+      [rows]="rowsLookingAhead"
+      [columns]="columnsLookingAhead"
+      [columnMode]="'force'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="'auto'"
+      [trackByProp]="$$index"
+      [selectionType]="'single'"
+      (select)='onSelectRow($event)'
+
+      [dragulaName]="'LookingAheadBag'"
+      [dragulaModel]="rowsLookingAhead"
+      [classSelector]="'selector fa fa-bars'"
+      (directiveDrop)="onDrop($event)"
+      (directiveDrag)="onDrag($event)">
+      <ngx-datatable-column [flexGrow]="0" >
+          <template ngx-datatable-header-template>
+              <span>Drag</span>
+          </template>
+          <template row="row" ngx-datatable-cell-template>
+              <span class="selector fa fa-bars"></span>
+          </template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [flexGrow]="1">
+          <template ngx-datatable-header-template>
+              <span >#</span>
+          </template>
+          <template let-row="row" ngx-datatable-cell-template>
+              <span>{{row.id}}</span>
+          </template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [flexGrow]="1">
+          <template ngx-datatable-header-template>
+              <span >Goal Title</span>
+          </template>
+          <template let-row="row" ngx-datatable-cell-template>
+              <span>{{row.goal}}</span>
+          </template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [flexGrow]="1">
+          <template ngx-datatable-header-template>
+              <span >Status</span>
+          </template>
+          <template let-row="row" ngx-datatable-cell-template>
+              <span>{{row.status}}</span>
+          </template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [flexGrow]="1">
+          <template ngx-datatable-header-template>
+              <span >Last Updated</span>
+          </template>
+          <template let-row="row" ngx-datatable-cell-template>
+              <span>{{row.date}}</span>
+          </template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [flexGrow]="1">
+          <template ngx-datatable-header-template>
+              <span >Author</span>
+          </template>
+          <template let-row="row" ngx-datatable-cell-template>
+              <span>{{row.author}}</span>
+          </template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
